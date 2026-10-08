@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PSD Template Editor</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <div class="brand">PSD Template Editor</div>
+      <div class="subtitle">Edita textos e imágenes de tus plantillas sin buscar capas manualmente.</div>
+    </div>
+    <div class="actions">
+      <label class="button primary" for="psdInput">Abrir PSD</label>
+      <input id="psdInput" type="file" accept=".psd,application/octet-stream" hidden />
+      <button id="refreshLayers" class="button" disabled>Actualizar campos</button>
+      <button id="savePsd" class="button" disabled>Descargar PSD</button>
+      <button id="exportPng" class="button" disabled>Descargar PNG</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <section class="card">
+        <h2>Campos editables</h2>
+        <p class="hint">Los textos se detectan automáticamente. Para imágenes, selecciona la capa que quieres reemplazar.</p>
+        <div id="status" class="status">Carga una plantilla PSD para comenzar.</div>
+      </section>
+
+      <section class="card">
+        <div class="section-title">
+          <h3>Textos</h3>
+          <span id="textCount" class="badge">0</span>
+        </div>
+        <div id="textFields" class="fields empty">No hay capas de texto detectadas.</div>
+      </section>
+
+      <section class="card">
+        <div class="section-title">
+          <h3>Reemplazar imagen</h3>
+        </div>
+        <label class="field-label">Capa destino</label>
+        <select id="imageLayer" disabled>
+          <option value="">Selecciona una capa</option>
+        </select>
+        <label class="upload-box" for="imageInput">
+          <span>📷 Seleccionar imagen</span>
+          <small>PNG, JPG, WEBP</small>
+        </label>
+        <input id="imageInput" type="file" accept="image/png,image/jpeg,image/webp" hidden disabled />
+        <div id="imageInfo" class="file-info"></div>
+        <button id="replaceImage" class="button primary full" disabled>Reemplazar imagen</button>
+        <p class="warning">Consejo: para conservar transformaciones y efectos de una plantilla, prepara las imágenes como Objetos Inteligentes y evita capas rasterizadas complejas.</p>
+      </section>
+    </aside>
+
+    <section class="editor-wrap">
+      <div class="editor-toolbar">
+        <span id="documentName">Sin documento</span>
+        <span id="editorStatus">Esperando PSD…</span>
+      </div>
+      <iframe id="photopea" title="Editor PSD" src="https://www.photopea.com"></iframe>
+    </section>
+  </main>
+
+  <footer>
+    <span>Procesamiento en el navegador: el PSD se envía al editor incrustado para procesarlo.</span>
+    <a href="https://www.photopea.com/api/" target="_blank" rel="noreferrer">Documentación de Photopea API</a>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
